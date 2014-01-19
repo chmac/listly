@@ -1,19 +1,14 @@
-if (Meteor.isClient) {
-  Template.hello.greeting = function () {
-    return "Welcome to listly.";
-  };
+if Meteor.isClient
+  Template.hello.greeting = ->
+    "Welcome to listly."
 
-  Template.hello.events({
-    'click input' : function () {
-      // template data, if any, is available in 'this'
-      if (typeof console !== 'undefined')
-        console.log("You pressed the button");
-    }
-  });
-}
+  Template.hello.events "click input": ->
+    
+    # template data, if any, is available in 'this'
+    console.log "You pressed the button"  if typeof console isnt "undefined"
 
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
-  });
-}
+if Meteor.isServer
+  Meteor.startup ->
+
+
+# code to run on server at startup
