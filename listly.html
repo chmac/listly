@@ -6,6 +6,7 @@
   <div class="container">
     {{> nav}}
     {{> hello}}
+    {{> lists}}
   </div>
 </body>
 
@@ -45,7 +46,35 @@
 </template>
 
 <template name="hello">
-  <h1>Hello World!</h1>
-  {{greeting}}
+  <h1>Listly!</h1>
   <input type="button" value="Click" />
+</template>
+
+<template name="lists">
+  <p>Here be your lists:</p>
+  {{#each lists}}
+    <div class="panel-group"  id="lists">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>
+            <a data-toggle="collapse" data-parent="#lists" href="#{{ _id }}">
+              {{ title }}
+            </a>
+          </h4>
+        </div>
+        <div id="{{ _id }}" class="panel-collapse collapse">
+          <div class="panel-body">
+            {{ description }}
+            <ul>
+              {{#each items}}
+                <li><input type="checkbox" id=""> {{ title }}: {{ description }}</li>
+              {{/each}}
+              <li><input type="text" id="new{{ _id }}" class="addItem"><button id="submit{{ _id }}" value="Save" class="btn">Save</button></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+  </ul>
 </template>
