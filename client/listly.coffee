@@ -34,13 +34,18 @@ okCancelEvents = (selector, callbacks) ->
 
 @Template.newItem.events
   'submit': (event, template) ->
+    event.preventDefault()
     titleInput = template.find('input')
     Lists.update
       _id: event.target.id
     ,
       $push:
         items:
+          id: Random.id()
           title: titleInput.value
+          done: false
     titleInput.value = ''
-    event.preventDefault()
 
+@Template.lists.events
+  'change': (event, template) ->
+    console.log 
