@@ -55,7 +55,7 @@
             </a>
           </h4>
         </div>
-        <div id="container-{{ _id }}" class="panel-collapse collapse">
+        <div id="container-{{ _id }}" class="panel-collapse collapse in">
           <div class="panel-body">
             <p>{{ description }}</p>
             <ul class="list-group">
@@ -85,7 +85,7 @@
   <form class="form-inline" role="form" id="{{ _id }}">
     <div class="form-group">
       <label class="sr-only" for="new{{ _id }}">Add an item</label>
-      <input type="text" id="new{{ _id }}" class="addItem">
+      <input type="text" id="new{{ _id }}title" name="title" class="addItem">
     </div>
     <button type="submit" id="submit{{ _id }}" class="btn btn-sm">Add</button>
   </form>
