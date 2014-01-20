@@ -1,1 +1,1 @@
-Meteor.subscribe 'lists'
+#Meteor.subscribe 'lists'

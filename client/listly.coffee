@@ -26,13 +26,14 @@ okCancelEvents = (selector, callbacks) ->
   events
 
 
-# Copy this into the client to create a collection client side
-@Lists = new Meteor.Collection 'lists'
-
-@Template.lists.lists = () ->
+Template.lists.lists = () ->
   Lists.find().fetch()
 
-@Template.newItem.events
+Template.lists.helpers
+  checked: () ->
+    if this.done then 'checked' else ''
+
+Template.newItem.events
   'submit': (event, template) ->
     event.preventDefault()
     titleInput = template.find('input')
@@ -46,6 +47,7 @@ okCancelEvents = (selector, callbacks) ->
           done: false
     titleInput.value = ''
 
-@Template.lists.events
+Template.lists.events
   'change': (event, template) ->
-    console.log 
+    listId = $(event.target).data('list-id')
+    Meteor.call 'unDone', listId, this.id, event.target.checked
