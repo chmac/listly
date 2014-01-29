@@ -33,6 +33,10 @@ Template.lists.helpers
   checked: () ->
     if this.done then 'checked' else ''
 
+Template.list.preserve
+  'div.panel-collapse': (node) ->
+    return node.id
+
 Template.newItem.events
   'submit': (event, template) ->
     event.preventDefault()
