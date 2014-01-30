@@ -80,6 +80,7 @@
     </div>
   {{/each}}
   </ul>
+  {{> newList}}
 </template>
 
 <template name="newItem">
@@ -90,4 +91,16 @@
     </div>
     <button type="submit" id="submit{{ _id }}" class="btn btn-sm">Add</button>
   </form>
+</template>
+
+<template name="newList">
+  <div class="new-list">
+    <form class="form-inline" role="form" id="new-list">
+      <div class="form-group">
+        <label class="sr-only" for="new-list-title">Add a list</label>
+        <input type="text" id="new-list-title" name="title" class="new-list">
+      </div>
+      <button type="submit" id="submit-new-list" class="btn btn-sm">New List</button>
+    </form>
+  </div>
 </template>

@@ -55,3 +55,12 @@ Template.newItem.events
           title: titleInput.value
           done: false
     titleInput.value = ''
+
+# Create a new list when the new-list form is submitted
+Template.newList.events
+  'submit': (event, template) ->
+    event.preventDefault()
+    titleInput = template.find('input')
+    Lists.insert
+      title: titleInput.value
+    titleInput.value = ''
