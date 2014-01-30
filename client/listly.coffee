@@ -37,6 +37,11 @@ Template.list.preserve
   'div.panel-collapse': (node) ->
     return node.id
 
+Template.lists.events
+  'change': (event, template) ->
+    listId = $(event.target).data('list-id')
+    Meteor.call 'unDone', listId, this.id, event.target.checked
+
 Template.newItem.events
   'submit': (event, template) ->
     event.preventDefault()
@@ -50,8 +55,3 @@ Template.newItem.events
           title: titleInput.value
           done: false
     titleInput.value = ''
-
-Template.lists.events
-  'change': (event, template) ->
-    listId = $(event.target).data('list-id')
-    Meteor.call 'unDone', listId, this.id, event.target.checked
