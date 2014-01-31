@@ -52,7 +52,15 @@ Meteor.methods
     # Find the user in the database
     if Meteor.isServer
       user = Meteor.users.find
-        'emails.address': email
+        $or: [
+          'emails.address': email
+        ,
+          'services.google.email': email
+        ,
+          'services.google.email': email
+        #,
+        #  'services.github.email': email
+        ]
       .fetch()
       if user.length isnt 1
         return false
