@@ -32,15 +32,16 @@ Template.lists.lists = () ->
 Template.lists.helpers
   checked: () ->
     if this.done then 'checked' else ''
-
-Template.lists.preserve
-  'div.panel-collapse': (node) ->
-    return node.id
+  open: () ->
+    if window.openPanel? and window.openPanel is this._id then 'in' else 'collapse'
 
 Template.lists.events
-  'change': (event, template) ->
+  'change input[type=checkbox]': (event, template) ->
     listId = $(event.target).data('list-id')
     Meteor.call 'unDone', listId, this.id, event.target.checked
+  'click .panel .panel-heading a': (event, template) ->
+    if not jQuery(event.target).hasClass('collapsed')
+      window.openPanel = this._id
 
 Template.newItem.events
   'submit': (event, template) ->
