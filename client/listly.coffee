@@ -72,8 +72,7 @@ Template.newUserAccess.events
         ,
           $push:
             users:
-              id: result
-              addedAt: new Date
+              _.extend result, addedAt: new Date
         if Meteor.isClient
           FlashMessages.sendInfo 'User added to list.', {autoHide: true, hideDelay: 10000}
       else
