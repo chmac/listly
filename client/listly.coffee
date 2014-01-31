@@ -27,7 +27,9 @@ okCancelEvents = (selector, callbacks) ->
 
 
 Template.lists.lists = () ->
-  Lists.find().fetch()
+  Lists.find
+    userId: Meteor.userId()
+  .fetch()
 
 Template.lists.helpers
   checked: () ->

@@ -1,6 +1,16 @@
 # Copy this into the client to create a collection client side
 @Lists = new Meteor.Collection 'lists'
 
+@Lists.allow
+  insert: (userId, list) ->
+    if not userId?
+      throw new Meteor.Error 400, "Cannot create lists unless logged in."
+    _.extend list, userId: userId
+  update: (userId, list, fieldNames, modifier) ->
+    if list.userId isnt userId
+      throw new Meteor.Error 400, "Naughty, naughty. You can only update your own lists."
+    true
+
 # Expose some methods we can call from client or server
 Meteor.methods
   unDone: (listId, itemId, done) ->
