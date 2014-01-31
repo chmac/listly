@@ -27,9 +27,12 @@ okCancelEvents = (selector, callbacks) ->
 
 
 Template.lists.lists = () ->
+  # Return nothing if the user is not logged in
+  if Meteor.userId() is null
+    return []
   Lists.find
     $or: [
-      userId: Meteor.userId()
+      'userId': Meteor.userId()
     ,
       'users._id': Meteor.userId()
     ]
