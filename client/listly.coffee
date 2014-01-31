@@ -29,6 +29,7 @@ okCancelEvents = (selector, callbacks) ->
 Template.lists.lists = () ->
   # Return nothing if the user is not logged in
   if Meteor.userId() is null
+    FlashMessages.sendInfo 'Please register or log in to see lists.', {autoHide: false}
     return []
   Lists.find
     $or: [
