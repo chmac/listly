@@ -10,6 +10,10 @@
     if list.userId isnt userId
       throw new Meteor.Error 400, "Naughty, naughty. You can only update your own lists."
     true
+  remove: (userId, list) ->
+    if list.userId isnt userId
+      throw new Meteor.Error 400, "Naughty, naughty. You can only delete your own lists."
+    true
 
 # Expose some methods we can call from client or server
 Meteor.methods
