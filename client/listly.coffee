@@ -44,6 +44,8 @@ Template.lists.events
   'click .panel .panel-heading a': (event, template) ->
     if not jQuery(event.target).hasClass('collapsed')
       window.openPanel = this._id
+  'click .delete': (event, template) ->
+    Lists.remove this._id
 
 Template.newItem.events
   'submit': (event, template) ->
