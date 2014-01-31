@@ -48,7 +48,7 @@ Template.lists.events
 Template.newItem.events
   'submit': (event, template) ->
     event.preventDefault()
-    titleInput = template.find('input')
+    titleInput = template.find 'input'
     Lists.update
       _id: event.target.id
     ,
