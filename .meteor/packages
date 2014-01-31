@@ -9,9 +9,9 @@ preserve-inputs
 bootstrap-3
 insecure
 coffeescript
-accounts-ui
 accounts-facebook
 accounts-google
 accounts-github
 accounts-twitter
 accounts-password
+accounts-ui-bootstrap-3
