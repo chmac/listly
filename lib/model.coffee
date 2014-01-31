@@ -7,7 +7,7 @@
       throw new Meteor.Error 400, "Cannot create lists unless logged in."
     _.extend list, userId: userId
   update: (userId, list, fieldNames, modifier) ->
-    if list.userId isnt userId
+    if list.userId isnt userId and not _.contains(_.pluck(list.users, '_id'), userId)
       throw new Meteor.Error 400, "Naughty, naughty. You can only update your own lists."
     true
   remove: (userId, list) ->
