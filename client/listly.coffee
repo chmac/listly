@@ -59,6 +59,28 @@ Template.newItem.events
           done: false
     titleInput.value = ''
 
+Template.newUserAccess.events
+  'submit': (event, template) ->
+    event.preventDefault()
+    emailInput = template.find 'input'
+    Meteor.call 'findUserIdByEmail', emailInput.value, (error, result) =>
+      console.log 'result of findUserIdByEmail was %s for list id %s', result, this._id
+      if result
+        Lists.update
+          _id: this._id
+        ,
+          $push:
+            users:
+              id: result
+              addedAt: new Date
+        if Meteor.isClient
+          FlashMessages.sendInfo 'User added to list.', {autoHide: true, hideDelay: 10000}
+      else
+        if Meteor.isClient
+          FlashMessages.sendError 'User was not not found.', {autoHide: true, hideDelay: 10000}
+    if Meteor.isClient
+      emailInput.value = ''
+
 # Create a new list when the new-list form is submitted
 Template.newList.events
   'submit': (event, template) ->

@@ -41,3 +41,21 @@ Meteor.methods
       modifier = {$set: {}}
       modifier.$set['items.' + itemIndex + '.done'] = done
       Lists.update listId, modifier
+
+  findUserIdByEmail: (email) ->
+    check email, String
+    
+    # Find the user in the database
+    if Meteor.isServer
+      user = Meteor.users.find
+        'emails.address': email
+      .fetch()
+      if user.length isnt 1
+        return false
+      else
+        return user[0]._id
+
+if Meteor.isClient
+  Meteor.startup () ->
+    FlashMessages.configure
+      autoHide: false
