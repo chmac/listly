@@ -46,9 +46,9 @@ Meteor.methods
       modifier.$set['items.' + itemIndex + '.done'] = done
       Lists.update listId, modifier
 
+  # Take an email and find a user _id and best username
   findUserIdByEmail: (email) ->
     check email, String
-    
     # Find the user in the database
     if Meteor.isServer
       user = Meteor.users.find
@@ -57,7 +57,17 @@ Meteor.methods
       if user.length isnt 1
         return false
       else
-        return user[0]._id
+        # Find the best available username
+        if user[0].services?.facebook?.username?
+          username = user[0].services.facebook.username
+        else if user[0].profile?.name?
+          username = user[0].profile.name
+        else if user[0].emails?[0].address?
+          username = user[0].emails[0].address
+        else
+          username = false
+        _id: user[0]._id
+        username: username
 
 if Meteor.isClient
   Meteor.startup () ->
