@@ -66,7 +66,6 @@ Template.newUserAccess.events
     event.preventDefault()
     emailInput = template.find 'input'
     Meteor.call 'findUserIdByEmail', emailInput.value, (error, result) =>
-      console.log 'result of findUserIdByEmail was %s for list id %s', result, this._id
       if result
         Lists.update
           _id: this._id
