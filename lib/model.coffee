@@ -11,7 +11,6 @@ Meteor.methods
     # Get the list from the id
     lists = Lists.find({_id: listId}).fetch()
     list = lists[0]
-    console.log list
     
     itemIndex = _.indexOf(_.pluck(list.items, 'id'), itemId)
     
